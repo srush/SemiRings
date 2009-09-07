@@ -6,6 +6,15 @@ import qualified Data.Set as S
 import Data.Monoid
 import Data.Maybe (isNothing)
 
+
+-- | The 'Derivation' semiring keeps track of a single path or derivation 
+--   that led to the known output. If there are more than one path it discards 
+--   in favor the lesser path (based on ord). The main purpose of this semiring 
+--   is to track derivations for ViterbiNBestDerivation. If you want to keep all paths, 
+--   use 'MultiDerivation'.
+--
+--   Derivation takes a Monoid as an argument that describes how to build up paths or 
+--   more complicated structures.  
 newtype Derivation m = Derivation (Maybe m)
     deriving (Eq, Show, Ord) 
 
@@ -27,6 +36,11 @@ instance (Ord m) => Monoid (Derivation m) where
 instance (Monoid m, Eq m, Ord m) => SemiRing (Derivation m)
 
 
+-- | The 'MultiDerivation' semiring keeps track of a all paths or derivations 
+--   that led to the known output. This can be useful for debugging output.
+-- 
+--  Keeping all these paths around can be expensive. 'MultiDerivation' leaves open 
+--  the implementation of the internal path monoid for more compact representations. 
 newtype MultiDerivation m = MultiDerivation (S.Set m)
     deriving (Eq, Show, Ord) 
 
