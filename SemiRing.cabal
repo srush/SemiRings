@@ -1,0 +1,23 @@
+name:                SemiRing
+version:             0.1
+synopsis:            A type class for semirings and some basic implementations
+description:         This provides a type class for semi-rings and some trivial 
+                     implementations of common semi-rings for natural language 
+                     applications.
+category:            Natural Language Processing
+license:             BSD3
+license-file:        LICENSE
+author:              Sasha Rush
+maintainer:          <srush@mit.edu>
+build-Depends:       base       >= 3   && < 4,
+                     containers >= 0.1 && < 0.3,
+                     monoids    >= 0.2 && < 0.3,
+                     Boolean
+build-Type:          Simple
+ghc-options:
+cabal-version:       >= 1.2
+
+Exposed-modules:     NLP.SemiRing,
+                     NLP.SemiRing.Accept
+                     NLP.SemiRing.Prob
+                     
