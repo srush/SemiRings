@@ -32,8 +32,9 @@ library
 executable hstestsemi
     main-is:            Tests.hs
     other-modules:      NLP.SemiRing,
-                        NLP.SemiRing.Accept
-                        NLP.SemiRing.Prob
+                        NLP.SemiRing.Boolean,
+                        NLP.SemiRing.Prob,
+                        NLP.SemiRing.Viterbi
 
     
     hs-source-dirs: . tests/
@@ -47,7 +48,7 @@ executable hstestsemi
                      test-framework,
                      test-framework-hunit,
                      test-framework-quickcheck2
-                     
+                    
                      
     if !flag(testing)
         buildable: False
