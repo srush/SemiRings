@@ -9,15 +9,46 @@ license:             BSD3
 license-file:        LICENSE
 author:              Sasha Rush
 maintainer:          <srush@mit.edu>
-build-Depends:       base       >= 3   && < 4,
-                     containers >= 0.1 && < 0.3,
-                     monoids    >= 0.2 && < 0.3,
-                     Boolean
 build-Type:          Simple
-ghc-options:
 cabal-version:       >= 1.2
 
-Exposed-modules:     NLP.SemiRing,
-                     NLP.SemiRing.Accept
-                     NLP.SemiRing.Prob
+flag testing
+    description: Testing mode, only build minimal components
+    default: False
+
+library
+    exposed-modules:     NLP.SemiRing,
+                         NLP.SemiRing.Accept
+                         NLP.SemiRing.Prob
+
+    if flag(testing)
+        buildable: False
+
+    build-Depends:   base       >= 3   && < 4,
+                     containers >= 0.1 && < 0.3,
+                     monoids    >= 0.2.0.2 && < 0.3,
+                     Boolean
+
+executable hstestsemi
+    main-is:            Tests.hs
+    other-modules:      NLP.SemiRing,
+                        NLP.SemiRing.Accept
+                        NLP.SemiRing.Prob
+
+    
+    hs-source-dirs: . tests/
+
+    build-Depends:   base       >= 3   && < 4,
+                     containers >= 0.1 && < 0.3,
+                     monoids    >= 0.2.0.2 && < 0.3,
+                     Boolean,
+                     QuickCheck >= 2,
+                     HUnit,
+                     test-framework,
+                     test-framework-hunit,
+                     test-framework-quickcheck2
                      
+                     
+    if !flag(testing)
+        buildable: False
+                  

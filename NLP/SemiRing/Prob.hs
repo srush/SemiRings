@@ -1,7 +1,9 @@
-module NLP.ChartParse.SemiRing.Prob where 
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+module NLP.SemiRing.Prob where 
+import NLP.SemiRing
 
 newtype ProbRing = ProbRing Double
-    deriving (Eq, Show, Num, Fractional) 
+    deriving (Eq, Show, Num, Fractional, Ord) 
 
 instance Multiplicative ProbRing where
     one = 1.0

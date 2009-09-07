@@ -1,4 +1,7 @@
-module NLP.ChartParse.Accept
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+module NLP.SemiRing.Accept where
+import NLP.SemiRing
+import Data.Boolean
 newtype BoolRing = BoolRing Bool
     deriving (Eq, Show, Boolean) 
 
