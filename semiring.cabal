@@ -1,5 +1,5 @@
 name:                semiring
-version:             0.1
+version:             0.1.1
 synopsis:            Semirings, ring-like structures used for dynamic programming applications 
 description:         This provides a type class for semirings and 
                      implementations of the common semirings used in natural language 
@@ -25,7 +25,7 @@ library
                          NLP.Semiring.Counting
                          NLP.Semiring.Derivation
                          NLP.Semiring.ViterbiNBestDerivation
-
+    other-modules:       NLP.SemiRing.Helpers
     if flag(testing)
         buildable: False
 
