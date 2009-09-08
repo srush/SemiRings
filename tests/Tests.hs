@@ -8,14 +8,14 @@ import Test.Framework.Providers.QuickCheck2 (testProperty)
 import Test.QuickCheck
 import Test.HUnit
 
-import NLP.SemiRing
-import NLP.SemiRing.Boolean
-import NLP.SemiRing.Prob
-import NLP.SemiRing.Viterbi
-import NLP.SemiRing.ViterbiNBest
-import NLP.SemiRing.Counting
-import NLP.SemiRing.Derivation
-import NLP.SemiRing.ViterbiNBestDerivation
+import NLP.Semiring
+import NLP.Semiring.Boolean
+import NLP.Semiring.Prob
+import NLP.Semiring.Viterbi
+import NLP.Semiring.ViterbiNBest
+import NLP.Semiring.Counting
+import NLP.Semiring.Derivation
+import NLP.Semiring.ViterbiNBestDerivation
 
 import qualified Data.Set as S
 import Data.List
@@ -24,7 +24,7 @@ import Control.Monad (liftM)
 main = defaultMain tests
 
 tests = [
-        testGroup "SemiRing Props"  [
+        testGroup "Semiring Props"  [
                        testProperty "semiProb bool" prop_boolRing,
                        testProperty "semiProb prob" prop_probRing,
                        testProperty "semiProb viterbi" prop_viterbiRing,
@@ -64,53 +64,53 @@ type Eql s = (s -> s -> Bool)
 
 
 -- (a * b) * c = a * (b * c)
-associativeTimes :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+associativeTimes :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 associativeTimes (s1, s2, s3) eq =  
     ((s1 `times` s2) `times` s3) `eq`
     (s1 `times` (s2 `times` s3))
 
 -- (a + b) + c = a + (b + c)
-associativePlus :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+associativePlus :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 associativePlus (s1, s2, s3) eq = 
     ((s1 `mappend` s2) `mappend` s3) `eq`
      (s1 `mappend` (s2 `mappend` s3))
 
 
 -- a + b = b + a
-commutativePlus :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+commutativePlus :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 commutativePlus (a, b, _) eq = 
     (a `mappend` b)  `eq`
     (b `mappend` a)
 
 
 -- a * (b + c) = (a * b) +  (a * c)
-distribution :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+distribution :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 distribution (s1, s2, s3) eq = 
     (s1 `times` (s2 `mappend` s3)) `eq`
     ((s1 `times` s2) `mappend` (s1 `times` s3))
 
 
 -- a + 0 = 0 + a = a
-zeroAdd :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+zeroAdd :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 zeroAdd (a, _, _) eq = 
     (mempty `mappend` a) `eq` a &&
     (a `mappend` mempty) `eq` a
 
 
 -- a * 0 = 0
-zeroMult :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+zeroMult :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 zeroMult (a, _, _) eq = 
     (mempty `times` a) `eq` mempty && 
     (a `times` mempty) `eq` mempty 
                      
 
 
-oneMult :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+oneMult :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 oneMult (a, _, _) eq = 
     (one `times` a) `eq` a &&
     (a `times` one) `eq` a
 
-semiRingProps :: (SemiRing s) => (s,s,s) -> Eql s -> Bool
+semiRingProps :: (Semiring s) => (s,s,s) -> Eql s -> Bool
 semiRingProps s eq = and [distribution s eq, 
                           associativePlus s eq, 
                           zeroAdd s eq, 

@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.SemiRing.Viterbi where
-import NLP.SemiRing
-import NLP.SemiRing.ViterbiNBest
+module NLP.Semiring.Viterbi where
+import NLP.Semiring
+import NLP.Semiring.ViterbiNBest
 
 data One = One  
 instance N One where 

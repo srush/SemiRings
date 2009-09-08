@@ -1,4 +1,4 @@
-name:                SemiRing
+name:                semiring
 version:             0.1
 synopsis:            A type class for semirings and some basic implementations
 description:         This provides a type class for semi-rings and some trivial 
@@ -17,9 +17,14 @@ flag testing
     default: False
 
 library
-    exposed-modules:     NLP.SemiRing,
-                         NLP.SemiRing.Accept
-                         NLP.SemiRing.Prob
+    exposed-modules:     NLP.Semiring
+                         NLP.Semiring.Boolean
+                         NLP.Semiring.Prob
+                         NLP.Semiring.Viterbi
+                         NLP.Semiring.ViterbiNBest
+                         NLP.Semiring.Counting
+                         NLP.Semiring.Derivation
+                         NLP.Semiring.ViterbiNBestDerivation
 
     if flag(testing)
         buildable: False
@@ -31,12 +36,6 @@ library
 
 executable hstestsemi
     main-is:            Tests.hs
-    other-modules:      NLP.SemiRing,
-                        NLP.SemiRing.Boolean,
-                        NLP.SemiRing.Prob,
-                        NLP.SemiRing.Viterbi
-
-    
     hs-source-dirs: . tests/
 
     build-Depends:   base       >= 3   && < 4,

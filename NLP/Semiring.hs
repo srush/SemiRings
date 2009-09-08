@@ -1,13 +1,13 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.SemiRing(
-  -- * SemiRing
+module NLP.Semiring(
+  -- * Semiring
   --                    
-  -- $SemiRingDesc
+  -- $SemiringDesc
 
   Multiplicative(..), 
   Monoid(..), 
-  SemiRing, 
-  WeightedSemiRing, 
+  Semiring, 
+  WeightedSemiring, 
   Weighted(..)) where
  
 import Data.Monoid
@@ -17,7 +17,7 @@ import Data.Function (on)
 
 
 
--- $SemiRingDesc
+-- $SemiringDesc
 -- A Semirings (rings without additive inverses, http://en.wikipedia.org/wiki/Semiring) are 
 -- the fundamental structure for performing computations over finite state machines, 
 -- parsers, and other dynamic programmy-systems. This library extends the basic structures  
@@ -29,14 +29,14 @@ import Data.Function (on)
 
 
 
--- | A 'SemiRing' is made up of an additive Monoid and a Multiplicative.
+-- | A 'Semiring' is made up of an additive Monoid and a Multiplicative.
 --   It must also satisfy several other algebraic properties checked by quickcheck. 
-class (Multiplicative a, Monoid a) => SemiRing a
+class (Multiplicative a, Monoid a) => Semiring a
 
 
--- | A 'WeightedSemiRing' also includes a sensical ordering over choices. 
+-- | A 'WeightedSemiring' also includes a sensical ordering over choices. 
 --   i.e. out of two choices which is better. This is used for Viterbi selection.   
-class (SemiRing a, Ord a) => WeightedSemiRing a
+class (Semiring a, Ord a) => WeightedSemiring a
 
    
 instance (Multiplicative a, Multiplicative b) => Multiplicative (a,b) where 
@@ -47,17 +47,17 @@ instance (Multiplicative a, Multiplicative b) => Multiplicative (a,b) where
 -- | Dual semirings can be useful. For instance combining the  
 --   Prob semiring and the MultiDerivation ring gives the total likelihood of 
 --   a derivation along with the paths to get there. 
-instance (SemiRing a, SemiRing b) => SemiRing (a,b)  
+instance (Semiring a, Semiring b) => Semiring (a,b)  
 
 
--- | The 'Weighted' type is the main type of WeightedSemiRing.
+-- | The 'Weighted' type is the main type of WeightedSemiring.
 --   It combines scoring semiring with a history semiring.
 -- 
 --   The best example of this is the ViterbiDerivation semiring.
 newtype Weighted semi1 semi2 = Weighted (semi1, semi2)
-    deriving (Eq, Show, Monoid, Multiplicative, SemiRing)
+    deriving (Eq, Show, Monoid, Multiplicative, Semiring)
 
 instance (Ord semi1, Eq semi2) => Ord (Weighted semi1 semi2) where 
     compare (Weighted s1) (Weighted s2) = (compare `on` fst) s1 s2 
 
-instance (WeightedSemiRing a, Eq b, SemiRing b) => WeightedSemiRing (Weighted a b)
+instance (WeightedSemiring a, Eq b, Semiring b) => WeightedSemiring (Weighted a b)

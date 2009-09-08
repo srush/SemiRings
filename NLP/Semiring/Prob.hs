@@ -1,6 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.SemiRing.Prob where 
-import NLP.SemiRing
+module NLP.Semiring.Prob where 
+import NLP.Semiring
 
 -- | The 'Prob' semiring keeps track of the likelihood of the known output 
 --   by keeping track of the probability of all paths. 
@@ -15,5 +15,5 @@ instance Monoid Prob where
     mempty = 0.0
     mappend = (+)
 
-instance SemiRing Prob 
-instance WeightedSemiRing Prob 
+instance Semiring Prob 
+instance WeightedSemiring Prob 

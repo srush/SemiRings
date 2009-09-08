@@ -1,10 +1,10 @@
-module NLP.SemiRing.ViterbiNBestDerivation where
-import NLP.SemiRing
+module NLP.Semiring.ViterbiNBestDerivation where
+import NLP.Semiring
 import Data.List 
-import NLP.SemiRing.Viterbi
-import NLP.SemiRing.ViterbiNBest
-import NLP.SemiRing.Prob
-import NLP.SemiRing.Derivation
+import NLP.Semiring.Viterbi
+import NLP.Semiring.ViterbiNBest
+import NLP.Semiring.Prob
+import NLP.Semiring.Derivation
 
 -- | The 'ViterbiNBestDerivation' is an example of a more complicated semiring
 --   built up from smaller components. It keeps track of the top N scoring paths 

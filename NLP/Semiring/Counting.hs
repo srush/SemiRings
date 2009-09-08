@@ -1,6 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.SemiRing.Counting where
-import NLP.SemiRing
+module NLP.Semiring.Counting where
+import NLP.Semiring
 
 -- | The 'Counting' semiring keeps track of the number of paths 
 --   or derivations led to a given output.
@@ -16,6 +16,6 @@ instance Monoid Counting where
     mappend = (+)
 
 
-instance SemiRing Counting 
-instance WeightedSemiRing Counting 
+instance Semiring Counting 
+instance WeightedSemiring Counting 
 

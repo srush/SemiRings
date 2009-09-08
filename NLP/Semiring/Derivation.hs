@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.SemiRing.Derivation (Derivation(..), MultiDerivation(..)) where
-import NLP.SemiRing
-import NLP.SemiRing.Helpers
+module NLP.Semiring.Derivation (Derivation(..), MultiDerivation(..)) where
+import NLP.Semiring
+import NLP.Semiring.Helpers
 import qualified Data.Set as S 
 import Data.Monoid
 import Data.Maybe (isNothing)
@@ -33,7 +33,7 @@ instance (Ord m) => Monoid (Derivation m) where
                        (s1, Nothing) -> s1
                        (s1, s2) -> max s1 s2                          
 
-instance (Monoid m, Eq m, Ord m) => SemiRing (Derivation m)
+instance (Monoid m, Eq m, Ord m) => Semiring (Derivation m)
 
 
 -- | The 'MultiDerivation' semiring keeps track of a all paths or derivations 
@@ -55,5 +55,5 @@ instance (Ord m) => Monoid (MultiDerivation m) where
     mempty = MultiDerivation S.empty
     mappend (MultiDerivation s1) (MultiDerivation s2) = MultiDerivation $ S.union s1 s2
 
-instance (Ord m, Monoid m, Eq m) => SemiRing (MultiDerivation m)
+instance (Ord m, Monoid m, Eq m) => Semiring (MultiDerivation m)
 

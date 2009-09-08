@@ -1,6 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.SemiRing.Boolean where
-import NLP.SemiRing
+module NLP.Semiring.Boolean where
+import NLP.Semiring
 import qualified Data.Boolean as B
 import Data.Boolean ((&&*),(||*)) 
 newtype Boolean = Boolean Bool
@@ -14,4 +14,4 @@ instance Monoid Boolean where
     mempty = B.false
     mappend = (||*)
 
-instance SemiRing Boolean 
+instance Semiring Boolean 
