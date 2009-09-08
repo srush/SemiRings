@@ -18,11 +18,11 @@ import Data.Function (on)
 
 
 -- $SemiringDesc
--- A Semirings (rings without additive inverses, http://en.wikipedia.org/wiki/Semiring) are 
--- the fundamental structure for performing computations over finite state machines, 
+-- Semirings (rings without additive inverses, http://en.wikipedia.org/wiki/Semiring) are 
+-- a commonly used structure for performing computations over finite state machines, 
 -- parsers, and other dynamic programmy-systems. This library extends the basic structures  
 -- defined for Monoids to Semirings and includes implementations of the major semirings 
--- in parsing. 
+-- for parsing. 
 --
 -- This work is based largely on "Semiring Parsing" by Joshua Goodman. (http://www.ldc.upenn.edu/acl/J/J99/J99-4004.pdf)  
 -- which describes many of the interesting parsing semirings.
