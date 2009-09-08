@@ -11,6 +11,7 @@ author:              Sasha Rush
 maintainer:          <srush at mit dot edu>
 build-Type:          Simple
 cabal-version:       >= 1.2
+homepage:            http://github.com/srush/SemiRings/tree/master
 
 flag testing
     description: Testing mode, only build minimal components
