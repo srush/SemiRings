@@ -1,14 +1,14 @@
 name:                semiring
 version:             0.1
-synopsis:            A type class for semirings and some basic implementations
-description:         This provides a type class for semi-rings and some trivial 
-                     implementations of common semi-rings for natural language 
-                     applications.
+synopsis:            Semirings, ring-like structures used for dynamic programming applications 
+description:         This provides a type class for semirings and 
+                     implementations of the common semirings used in natural language 
+                     processing.
 category:            Natural Language Processing
 license:             BSD3
 license-file:        LICENSE
 author:              Sasha Rush
-maintainer:          <srush@mit.edu>
+maintainer:          <srush at mit dot edu>
 build-Type:          Simple
 cabal-version:       >= 1.2
 
