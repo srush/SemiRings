@@ -1,5 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-module NLP.Semiring.Derivation (Derivation(..), MultiDerivation(..)) where
+module NLP.Semiring.Derivation (Derivation(..), MultiDerivation(..), mkDerivation, fromDerivation) where
 import NLP.Semiring
 import NLP.Semiring.Helpers
 import qualified Data.Set as S 
@@ -16,7 +16,7 @@ import Data.Maybe (isNothing)
 --   Derivation takes a Monoid as an argument that describes how to build up paths or 
 --   more complicated structures.  
 newtype Derivation m = Derivation (Maybe m)
-    deriving (Eq, Show, Ord) 
+    deriving (Eq, Ord) 
 
 instance (Monoid m) => Multiplicative (Derivation m) where
     one = Derivation $ Just mempty
@@ -34,6 +34,16 @@ instance (Ord m) => Monoid (Derivation m) where
                        (s1, s2) -> max s1 s2                          
 
 instance (Monoid m, Eq m, Ord m) => Semiring (Derivation m)
+
+instance (Show m) => Show (Derivation m) where 
+    show (Derivation (Just m)) = show m 
+    show (Derivation Nothing) = "[]" 
+
+mkDerivation :: (Monoid m ) => m -> Derivation m 
+mkDerivation = Derivation . Just  
+
+fromDerivation :: (Monoid m ) => Derivation m -> m 
+fromDerivation (Derivation (Just m)) = m  
 
 
 -- | The 'MultiDerivation' semiring keeps track of a all paths or derivations 
